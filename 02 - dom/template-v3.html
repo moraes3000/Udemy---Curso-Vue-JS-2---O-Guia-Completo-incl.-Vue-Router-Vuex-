@@ -3,17 +3,20 @@
 <div id="app">
     <h1>{{ titulo }}</h1>
     <p>{{saudacao()}}</p>
+    <a v-bind:href="link">{{link}}</a>
 </div>
 
 <script>
     new Vue({
         el: '#app',
         data: {
-            titulo: "Usando VueJs 2"
+            titulo: "Usando VueJs 2",
+            link: 'https://www.udemy.com/',
         },
         methods: {
             saudacao: function () {
-                return 'Boa semana!'
+                console.log(this)
+                return this.titulo
             }
         }
     })
