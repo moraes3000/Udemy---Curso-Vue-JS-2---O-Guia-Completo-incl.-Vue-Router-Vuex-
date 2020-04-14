@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mata monstro</title>
+
+    <!-- boostrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <!-- personalizado -->
+    <link rel="stylesheet" href="estilo.css">
+    <!-- vue -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+
+
+    <div id="app">
+        <h1>{{ titulo }}</h1>
+        <div class="panel scores">
+            <div class="score">
+                <h1>Jogador</h1>
+                <div class="life-bar">
+                    <div class="life" :class="{danger: playerLife < 20}" :style="{width: playerLife + '%'}">
+
+                    </div>
+                    <div>{{playerLife}}%</div>
+                </div>
+            </div>
+
+            <div class="score">
+                <h1>Mosntros</h1>
+                <div class="life-bar">
+                    <div class="life" :class="{danger: monsterLife < 20}" :style="{width: monsterLife + '%'}">
+
+
+                    </div>
+                    <div>{{monsterLife}}%</div>
+                </div>
+            </div>
+
+        </div>
+        <div v-if="hasResult" class="panel result">
+            <div v-if="monsterLife == 0" class="win alert alert-success">Você ganhou </div>
+            <div v-else class="lose alert alert-danger">Você perdeu </div>
+        </div>
+        <div class="panel buttons">
+            <template v-if="running">
+                <button @click="attack(false)" class="btn btn-primary">Ataque</button>
+                <button @click="attack(true)" class="btn btn-secondary">Ataque-especial</button>
+                <button @click="healAndHurt" class="btn btn-success">curar</button>
+                <button @click="running = false" class="btn btn-danger">desistir</button>
+            </template>
+
+            <button @click="startGame" v-else class="btn btn-primary">iniciar jogo</button>
+        </div>
+        <div v-if="logs.length" class="panel logs">
+            <ul>
+                <li v-for="log in logs" :class="log.cls" class="log">{{log.text}}</li>
+            </ul>
+        </div>
+    </div>
+
+
+
+
+    <!-- boostrap -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+    <!-- personalizado -->
+    <script src="app.js"></script>
+</body>
+
+</html>
